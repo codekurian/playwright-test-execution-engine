@@ -1,0 +1,9 @@
+{
+  "name": "playwright-runner",
+  "version": "1.0.0",
+  "devDependencies": {
+    "playwright": "^1.43.1",
+    "@playwright/test": "^1.43.1",
+    "typescript": "^5.4.5"
+  }
+} 
