@@ -6,7 +6,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # --- Stage 2: Node.js for Playwright dependencies ---
-FROM node:20-bullseye-slim AS node_deps
+FROM node:18-bullseye-slim AS node_deps
 WORKDIR /app
 COPY package.json ./
 RUN npm install && npx playwright install --with-deps
@@ -18,7 +18,7 @@ FROM eclipse-temurin:17-jre as final
 # Install Node.js (replace with org-specific if needed)
 RUN apt-get update && \
     apt-get install -y curl && \
-    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 

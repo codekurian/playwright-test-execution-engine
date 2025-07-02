@@ -8,21 +8,15 @@ import org.springframework.web.bind.annotation.*;
 public class PlaywrightTestController {
 
     @Autowired
-    private PlaywrightTestService service;
+    private PlaywrightTestHandler handler;
 
     @PostMapping("/run-test")
-    public ResponseEntity<String> runTest(@RequestBody TestRequest request) {
+    public ResponseEntity<String> runTest() {
         try {
-            String result = service.downloadAndRunTest(request.getGithubFileUrl());
+            String result = handler.handleRunTest();
             return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error: " + e.getMessage());
         }
-    }
-
-    public static class TestRequest {
-        private String githubFileUrl;
-        public String getGithubFileUrl() { return githubFileUrl; }
-        public void setGithubFileUrl(String githubFileUrl) { this.githubFileUrl = githubFileUrl; }
     }
 } 
